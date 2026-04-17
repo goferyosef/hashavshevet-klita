@@ -52,6 +52,14 @@ class SupplierDialog(QDialog):
         self.vat_combo.addItem('12% (⅔ מ-18%)', 12.0)
         form.addRow('שיעור מע"מ:', self.vat_combo)
 
+        self.account_key_edit = QLineEdit()
+        self.account_key_edit.setPlaceholderText("קוד ספק בחשבשבת (לדוגמה: 2001)")
+        form.addRow("קוד ספק (account key):", self.account_key_edit)
+
+        self.expense_account_edit = QLineEdit()
+        self.expense_account_edit.setPlaceholderText("קוד חשבון הוצאות (לדוגמה: 8500)")
+        form.addRow("חשבון הוצאות:", self.expense_account_edit)
+
         self.notes_edit = QLineEdit()
         self.notes_edit.setPlaceholderText("הערות אופציונליות")
         form.addRow("הערות:", self.notes_edit)
@@ -78,6 +86,8 @@ class SupplierDialog(QDialog):
         idx = self.vat_combo.findData(s.vat_rate)
         if idx >= 0:
             self.vat_combo.setCurrentIndex(idx)
+        self.account_key_edit.setText(s.account_key)
+        self.expense_account_edit.setText(s.expense_account)
         self.notes_edit.setText(s.notes)
 
     def _accept(self):
@@ -92,6 +102,8 @@ class SupplierDialog(QDialog):
             should_upload=self.upload_check.isChecked(),
             vat_rate=self.vat_combo.currentData(),
             aliases=aliases,
+            account_key=self.account_key_edit.text().strip(),
+            expense_account=self.expense_account_edit.text().strip(),
             notes=self.notes_edit.text().strip(),
         )
         self.accept()

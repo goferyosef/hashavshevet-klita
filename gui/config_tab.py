@@ -30,23 +30,69 @@ class ConfigTab(QWidget):
         title.setObjectName("section_title")
         outer.addWidget(title)
 
-        # Credentials group
-        creds_group = QGroupBox("פרטי כניסה לחשבשבת")
-        creds_layout = QFormLayout(creds_group)
-        creds_layout.setSpacing(10)
+        # ── API credentials ────────────────────────────────────────────────
+        api_group = QGroupBox("פרטי API של חשבשבת")
+        api_layout = QFormLayout(api_group)
+        api_layout.setSpacing(10)
+
+        self.api_key_edit = QLineEdit()
+        self.api_key_edit.setPlaceholderText("WizCloud API Private Key")
+        api_layout.addRow("API Private Key:", self.api_key_edit)
+
+        self.db_name_edit = QLineEdit()
+        self.db_name_edit.setPlaceholderText("שם מסד הנתונים (DB Name)")
+        api_layout.addRow("DB Name:", self.db_name_edit)
+
+        hint = QLabel(
+            'כיצד לקבל את המפתח: היכנס לחשבשבת → הגדרות → API → '
+            '"מפתח פרטי". אם לא מופיע — פנה לתמיכת WizCloud.'
+        )
+        hint.setWordWrap(True)
+        hint.setStyleSheet("color: #7F8C8D; font-size: 11px;")
+        api_layout.addRow("", hint)
+
+        outer.addWidget(api_group)
+
+        # ── Web credentials (for Playwright file attachment) ───────────────
+        web_group = QGroupBox("פרטי כניסה לאתר (לצירוף קבצים)")
+        web_layout = QFormLayout(web_group)
+        web_layout.setSpacing(10)
 
         self.username_edit = QLineEdit()
         self.username_edit.setPlaceholderText("שם משתמש")
-        creds_layout.addRow("שם משתמש:", self.username_edit)
+        web_layout.addRow("שם משתמש:", self.username_edit)
 
         self.password_edit = QLineEdit()
         self.password_edit.setEchoMode(QLineEdit.EchoMode.Password)
         self.password_edit.setPlaceholderText("סיסמה")
-        creds_layout.addRow("סיסמה:", self.password_edit)
+        web_layout.addRow("סיסמה:", self.password_edit)
 
-        outer.addWidget(creds_group)
+        outer.addWidget(web_group)
 
-        # Folders group
+        # ── Account codes ──────────────────────────────────────────────────
+        acc_group = QGroupBox('קודי חשבונות ברירת מחדל')
+        acc_layout = QFormLayout(acc_group)
+        acc_layout.setSpacing(10)
+
+        self.vat_account_edit = QLineEdit()
+        self.vat_account_edit.setPlaceholderText('לדוגמה: 1315')
+        acc_layout.addRow('חשבון מע"מ תשומות:', self.vat_account_edit)
+
+        self.default_expense_edit = QLineEdit()
+        self.default_expense_edit.setPlaceholderText('לדוגמה: 8500')
+        acc_layout.addRow('חשבון הוצאות ברירת מחדל:', self.default_expense_edit)
+
+        acc_note = QLabel(
+            'קודים אלה ישמשו כשלספק אין קוד משלו. '
+            'ניתן לעקוף לכל ספק בנפרד בלשונית "ספקים".'
+        )
+        acc_note.setWordWrap(True)
+        acc_note.setStyleSheet("color: #7F8C8D; font-size: 11px;")
+        acc_layout.addRow("", acc_note)
+
+        outer.addWidget(acc_group)
+
+        # ── Folders ────────────────────────────────────────────────────────
         folders_group = QGroupBox("תיקיות קלט")
         folders_layout = QFormLayout(folders_group)
         folders_layout.setSpacing(10)
@@ -93,10 +139,18 @@ class ConfigTab(QWidget):
                 self.invoice_edit.setText(cfg.get("invoice_folder", ""))
                 self.receipt_edit.setText(cfg.get("receipt_folder", ""))
                 self.username_edit.setText(cfg.get("username", ""))
+                self.db_name_edit.setText(cfg.get("db_name", ""))
+                self.vat_account_edit.setText(cfg.get("vat_account", ""))
+                self.default_expense_edit.setText(cfg.get("default_expense_account", ""))
             except Exception:
                 pass
+        # Load secrets from keyring
+        username = self.username_edit.text()
         try:
-            pwd = keyring.get_password(SERVICE_NAME, self.username_edit.text())
+            api_key = keyring.get_password(SERVICE_NAME, "api_key")
+            if api_key:
+                self.api_key_edit.setText(api_key)
+            pwd = keyring.get_password(SERVICE_NAME, username or "user")
             if pwd:
                 self.password_edit.setText(pwd)
         except Exception:
@@ -104,20 +158,24 @@ class ConfigTab(QWidget):
 
     def _save(self):
         username = self.username_edit.text().strip()
-        password = self.password_edit.text()
         cfg = {
-            "invoice_folder": self.invoice_edit.text().strip(),
-            "receipt_folder": self.receipt_edit.text().strip(),
-            "username": username,
+            "invoice_folder":          self.invoice_edit.text().strip(),
+            "receipt_folder":          self.receipt_edit.text().strip(),
+            "username":                username,
+            "db_name":                 self.db_name_edit.text().strip(),
+            "vat_account":             self.vat_account_edit.text().strip(),
+            "default_expense_account": self.default_expense_edit.text().strip(),
         }
         os.makedirs(os.path.dirname(CONFIG_FILE), exist_ok=True)
         with open(CONFIG_FILE, "w", encoding="utf-8") as f:
             json.dump(cfg, f, ensure_ascii=False, indent=2)
-        if username and password:
-            try:
-                keyring.set_password(SERVICE_NAME, username, password)
-            except Exception:
-                pass
+        try:
+            if self.api_key_edit.text():
+                keyring.set_password(SERVICE_NAME, "api_key", self.api_key_edit.text())
+            if username and self.password_edit.text():
+                keyring.set_password(SERVICE_NAME, username, self.password_edit.text())
+        except Exception:
+            pass
         QMessageBox.information(self, "הגדרות", "ההגדרות נשמרו בהצלחה ✔")
 
     # ── Public getters ────────────────────────────────────────────────────────
@@ -137,6 +195,22 @@ class ConfigTab(QWidget):
     @property
     def password(self) -> str:
         return self.password_edit.text()
+
+    @property
+    def api_key(self) -> str:
+        return self.api_key_edit.text().strip()
+
+    @property
+    def db_name(self) -> str:
+        return self.db_name_edit.text().strip()
+
+    @property
+    def vat_account(self) -> str:
+        return self.vat_account_edit.text().strip()
+
+    @property
+    def default_expense_account(self) -> str:
+        return self.default_expense_edit.text().strip()
 
 
 def _browse_folder(line_edit: QLineEdit):

@@ -90,8 +90,8 @@ class RunTab(QWidget):
         if not cfg.invoice_folder or not cfg.receipt_folder:
             QMessageBox.warning(self, "הגדרות חסרות", "יש להגדיר תיקיות קלט בלשונית 'הגדרות'.")
             return
-        if not self.demo_check.isChecked() and (not cfg.username or not cfg.password):
-            QMessageBox.warning(self, "הגדרות חסרות", "יש להזין פרטי כניסה בלשונית 'הגדרות'.")
+        if not self.demo_check.isChecked() and (not cfg.api_key or not cfg.db_name):
+            QMessageBox.warning(self, "הגדרות חסרות", "יש להזין API Key ו-DB Name בלשונית 'הגדרות'.")
             return
 
         self.log_view.clear()
@@ -106,8 +106,12 @@ class RunTab(QWidget):
         self._worker = RunWorker(
             invoice_folder=cfg.invoice_folder,
             receipt_folder=cfg.receipt_folder,
-            username=cfg.username,
-            password=cfg.password,
+            api_key=cfg.api_key,
+            db_name=cfg.db_name,
+            web_username=cfg.username,
+            web_password=cfg.password,
+            vat_account=cfg.vat_account,
+            default_expense_account=cfg.default_expense_account,
             supplier_manager=sm,
             demo_mode=self.demo_check.isChecked(),
         )
