@@ -1,1 +1,782 @@
-[]
+[
+  {
+    "id": "7f5cb0b2-c28f-4077-8a57-64a13b279c59",
+    "name": "כרטיס אשראי שמסתיים",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "01001",
+    "expense_account": ""
+  },
+  {
+    "id": "068273c9-7e69-4856-8ec7-c95a4a6a5458",
+    "name": "שלהבת מפעל מזון ומשקאות",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "11091",
+    "expense_account": ""
+  },
+  {
+    "id": "0ea5de9b-b386-46b8-8444-f6f323ab8e1c",
+    "name": "תוהמי משלוחים",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "21091",
+    "expense_account": ""
+  },
+  {
+    "id": "882ac76f-b365-4dfe-b009-273672640446",
+    "name": "ב. רדיוס טכנולוגיות בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "31091",
+    "expense_account": ""
+  },
+  {
+    "id": "3fa75ee9-bf78-40f5-8156-3fbee62319ad",
+    "name": "צבר א.ל אריזות בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "41091",
+    "expense_account": ""
+  },
+  {
+    "id": "e6d7f59a-4ee4-4ea4-8bb3-09c9d20ef1d8",
+    "name": "חבשוש אריה עסקי מזון בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "51091",
+    "expense_account": ""
+  },
+  {
+    "id": "404abc5c-3729-4cfd-8da9-5f75c7db0b31",
+    "name": "אריזות 0012 א. טננבום ובניו",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "61091",
+    "expense_account": ""
+  },
+  {
+    "id": "d1c051aa-d9c4-4021-900d-dda7994340e1",
+    "name": "עדן אריזות בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "71091",
+    "expense_account": ""
+  },
+  {
+    "id": "da62716c-82c1-4f5d-b83d-a78fcdeb86af",
+    "name": "י. פרסבורגר בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "81091",
+    "expense_account": ""
+  },
+  {
+    "id": "095f6c77-e07e-460d-aebe-fd2c33b44583",
+    "name": "בייר אנד ביונד",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "91091",
+    "expense_account": ""
+  },
+  {
+    "id": "4e8f7972-1fed-4f4a-8d9f-82e34c0f81b0",
+    "name": "נשיץ ברנדיס אמיר",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "02091",
+    "expense_account": ""
+  },
+  {
+    "id": "c5e9a42b-834a-4177-9b4a-9ff22a08444e",
+    "name": "אלון שסטל",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "12091",
+    "expense_account": ""
+  },
+  {
+    "id": "01f70226-88b1-4c77-9d45-56cd51049ec3",
+    "name": "הדס שרים רו`ח עו`ד",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "22091",
+    "expense_account": ""
+  },
+  {
+    "id": "be0b88c4-1eb9-45ec-b650-a9c0af5c6bcf",
+    "name": "ורמוטריה בע\"מ - ספק",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "32091",
+    "expense_account": ""
+  },
+  {
+    "id": "726038ff-b58c-42d7-b75c-01e6427c405f",
+    "name": "גוטו גלובל מוביליטי בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "52091",
+    "expense_account": ""
+  },
+  {
+    "id": "809a4a06-00df-4d92-aad0-0c56e6b83f0e",
+    "name": "זץ איבניר יזמות בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "62091",
+    "expense_account": ""
+  },
+  {
+    "id": "a6af66c9-aaf4-4dbb-9bb0-31922f12bc56",
+    "name": "שלי אילון",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "72091",
+    "expense_account": ""
+  },
+  {
+    "id": "4f2b797f-65ed-4a09-8ee7-feae18758070",
+    "name": "לירם בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "92091",
+    "expense_account": ""
+  },
+  {
+    "id": "736f80c1-760c-4e76-a497-82bcfdd3d30a",
+    "name": "ג`טי גטקסי סרוויסס ישראל",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "03091",
+    "expense_account": ""
+  },
+  {
+    "id": "7121e837-98c0-4709-b4bb-58857bbbe937",
+    "name": "עלה עלה בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "13091",
+    "expense_account": ""
+  },
+  {
+    "id": "2e2f0d54-64db-495e-92c8-76ecc7114f01",
+    "name": "מטלר",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "23091",
+    "expense_account": ""
+  },
+  {
+    "id": "2161108a-84ec-437f-939c-8ddfd8e27a6e",
+    "name": "יוס מכונות",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "33091",
+    "expense_account": ""
+  },
+  {
+    "id": "90b61ad6-bcc5-4ec2-b955-81190b72c6aa",
+    "name": "אוטותל",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "43091",
+    "expense_account": ""
+  },
+  {
+    "id": "ba7a0917-64a4-466c-b43b-a0eef7c83884",
+    "name": "חשבונית ירוקה בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "63091",
+    "expense_account": ""
+  },
+  {
+    "id": "5cbfef6e-aa8b-4ecf-9b62-57c46f8f539f",
+    "name": "מור קורל ספק",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "73091",
+    "expense_account": ""
+  },
+  {
+    "id": "bd2cb9ad-5b55-42ab-b10d-d059a27db545",
+    "name": "ויגן פרנדלי",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "83091",
+    "expense_account": ""
+  },
+  {
+    "id": "4133a925-0eaa-4a6d-b428-de9afb66bd39",
+    "name": "אלכוהום בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "93091",
+    "expense_account": ""
+  },
+  {
+    "id": "eb9ff199-f177-4822-91ff-1a2222a46107",
+    "name": "בורגון קראון בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "04091",
+    "expense_account": ""
+  },
+  {
+    "id": "15408edc-d312-4f99-8aa5-cee81203cd23",
+    "name": "טקסטורות סרגיו ברוידו",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "24091",
+    "expense_account": ""
+  },
+  {
+    "id": "2d1ca2d5-88fb-4c47-9d8a-f48ead4cfd42",
+    "name": "פדאקס",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "34091",
+    "expense_account": ""
+  },
+  {
+    "id": "c4e26a1a-d2ef-4790-9258-0cb08cf69d11",
+    "name": "ס.י. מדה בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "44091",
+    "expense_account": ""
+  },
+  {
+    "id": "1857bf2c-7b9d-4e9e-90e8-8cf3490e1190",
+    "name": "בית הגומי לוי",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "54091",
+    "expense_account": ""
+  },
+  {
+    "id": "dd18f04d-8f9d-4309-9ec3-f8b5dcd929f6",
+    "name": "יצחק ארגז",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "64091",
+    "expense_account": ""
+  },
+  {
+    "id": "273f93c8-89bc-4616-9e96-4bf47a6f9f58",
+    "name": "מכון התקנים",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "74091",
+    "expense_account": ""
+  },
+  {
+    "id": "67f11846-e3f0-4e53-8bb5-6a6835f2c36b",
+    "name": "די. אייץ. אל",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "84091",
+    "expense_account": ""
+  },
+  {
+    "id": "c7ed32b1-9d3b-4bc1-9e8d-5410cf8f121b",
+    "name": "הוברמן ובניו בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "94091",
+    "expense_account": ""
+  },
+  {
+    "id": "8a1aa658-4c91-4bd8-b408-9810d53b8762",
+    "name": "ווליבוקס טכנולוגיות בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "05091",
+    "expense_account": ""
+  },
+  {
+    "id": "d903986f-5e03-4b87-8ef3-b69ec14cda7e",
+    "name": "פאר פרינט עזרא לוי בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "15091",
+    "expense_account": ""
+  },
+  {
+    "id": "d81f90f0-c05a-4abf-97d4-69b2175da5b4",
+    "name": "רותם ברום קליגרפיה ועיצוב",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "55091",
+    "expense_account": ""
+  },
+  {
+    "id": "31826b61-3da9-454d-96a1-0e6190f3dbb3",
+    "name": "שחם דורי יעוץ פיננסי בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "65091",
+    "expense_account": ""
+  },
+  {
+    "id": "583e4fb9-2cf7-44cf-be7d-d33829c603e9",
+    "name": "גראו פיימנטס בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "75091",
+    "expense_account": ""
+  },
+  {
+    "id": "e06f5db3-e059-48c3-a0b0-b6a4b74dfb50",
+    "name": "החברים של ג`ורג`",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "85091",
+    "expense_account": ""
+  },
+  {
+    "id": "6997d366-fbc8-4737-af6f-fc079e950504",
+    "name": "בירד קו",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "95091",
+    "expense_account": ""
+  },
+  {
+    "id": "c1980f1d-3756-415a-af70-ddd95a27c17b",
+    "name": "שלמה פסגות בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "06091",
+    "expense_account": ""
+  },
+  {
+    "id": "0bfe640c-ddd2-42a0-8a71-a1f8aa725685",
+    "name": "סער טכנולוגיות )ז.ח(בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "26091",
+    "expense_account": ""
+  },
+  {
+    "id": "f5f1c6e4-0382-4fd7-b152-e826b7ae7286",
+    "name": "ש.ל מורן בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "36091",
+    "expense_account": ""
+  },
+  {
+    "id": "7ad1b5ad-6bd9-44c3-9039-e2faf7d9eb35",
+    "name": "א. רובינשטיין כימיקליים בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "46091",
+    "expense_account": ""
+  },
+  {
+    "id": "167fc228-3488-4e52-b51a-40dc640d7058",
+    "name": "וולקנו שליחויות",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "56091",
+    "expense_account": ""
+  },
+  {
+    "id": "3b6c365d-4a96-4bd9-a940-96ab92d7902b",
+    "name": "לימון יועצים",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "66091",
+    "expense_account": ""
+  },
+  {
+    "id": "000cbd07-52bb-47d9-9ec5-c36b3ae502cd",
+    "name": "נוף שלטים",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "76091",
+    "expense_account": ""
+  },
+  {
+    "id": "47570956-99ba-453f-a7f5-fa97d676c587",
+    "name": "חשבשבת בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "86091",
+    "expense_account": ""
+  },
+  {
+    "id": "3147c81f-c7e8-4c36-a2de-49feede36a15",
+    "name": "גל רוקח מאפס לאחד",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "96091",
+    "expense_account": ""
+  },
+  {
+    "id": "9aacf4bb-f712-4493-bea1-c027e43cbbd8",
+    "name": "הקומה השניה רוטשילד 42",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "07091",
+    "expense_account": ""
+  },
+  {
+    "id": "a0465677-c24b-4b46-ab8f-b42745377943",
+    "name": "סמורי תורגמן רוח",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "17091",
+    "expense_account": ""
+  },
+  {
+    "id": "9d8bd7cf-439e-46b1-a830-e6d9f8031e2a",
+    "name": "השלמה תעשיות דפוס בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "27091",
+    "expense_account": ""
+  },
+  {
+    "id": "501cb035-b7eb-4887-aac6-b94203c5b9a6",
+    "name": "משרדית",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "37091",
+    "expense_account": ""
+  },
+  {
+    "id": "4610fd63-c258-474a-ae6a-0af644aabe96",
+    "name": "וינופו בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "47091",
+    "expense_account": ""
+  },
+  {
+    "id": "6936df7f-f182-47cd-8f6e-6be7ce7d38ce",
+    "name": "דוד מויאל",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "57091",
+    "expense_account": ""
+  },
+  {
+    "id": "43076ab7-b945-4ab3-b982-8b39685a6410",
+    "name": "יערה ברייטבורד",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "67091",
+    "expense_account": ""
+  },
+  {
+    "id": "0ba888b7-8618-42bf-aa46-5e610dd463de",
+    "name": "אול פרודקט",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "77091",
+    "expense_account": ""
+  },
+  {
+    "id": "298bf47d-6125-4ddc-80be-7f59eab17450",
+    "name": "א. ש קרלה בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "87091",
+    "expense_account": ""
+  },
+  {
+    "id": "26e2d0f8-ee48-4fd3-b1dd-c6d4ce16afef",
+    "name": "טקס מקס שרותי אירוח בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "97091",
+    "expense_account": ""
+  },
+  {
+    "id": "7161692c-d52e-48a3-acc5-d23a1bdc548e",
+    "name": "ישראכרט",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "08091",
+    "expense_account": ""
+  },
+  {
+    "id": "acab086a-38b2-4cf0-9a50-180c10b92e8b",
+    "name": "אמריקן אקספרס בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "18091",
+    "expense_account": ""
+  },
+  {
+    "id": "0cdcdbcb-8ad9-4557-9ae6-71a7d1716630",
+    "name": "בלום דיגיטל",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "28091",
+    "expense_account": ""
+  },
+  {
+    "id": "36ccf4f7-b287-438a-92ac-abd33dedace3",
+    "name": "מכינטו מיכון מזון מתקדם",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "38091",
+    "expense_account": ""
+  },
+  {
+    "id": "c23d9ccd-27bb-474b-a433-cd59fd7d6526",
+    "name": "מערבה אירועים שותפות",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "48091",
+    "expense_account": ""
+  },
+  {
+    "id": "e040d412-210b-47a5-8498-bb5b92d06f39",
+    "name": "טל גופר עיצוב גרפי",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "58091",
+    "expense_account": ""
+  },
+  {
+    "id": "111e3ae7-af56-426c-8d9e-e59a5f71dc83",
+    "name": "כהן מדיה גרופ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "68091",
+    "expense_account": ""
+  },
+  {
+    "id": "5a663e32-ee57-43b4-ab92-e6ee0f768fe3",
+    "name": "שגיב בלום",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "78091",
+    "expense_account": ""
+  },
+  {
+    "id": "63aa43df-509d-43d2-9caa-c97ac253fe8b",
+    "name": "ג'יני קוקטיילים",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "88091",
+    "expense_account": ""
+  },
+  {
+    "id": "faf23f64-b34c-452c-9e73-086af465024b",
+    "name": "זהר שושני",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "98091",
+    "expense_account": ""
+  },
+  {
+    "id": "150a88aa-8da8-4b45-8539-ec62e2c1f434",
+    "name": "אייבורי מחשבים בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "09091",
+    "expense_account": ""
+  },
+  {
+    "id": "f5e2f9f8-1a68-4746-90f3-f1cc1514445c",
+    "name": "לבוטל ציוד מדעי )7991( בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "19091",
+    "expense_account": ""
+  },
+  {
+    "id": "971c7c64-c44e-497e-9b9c-a0c78d628c9b",
+    "name": "וירטוטקס בעמ",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "29091",
+    "expense_account": ""
+  },
+  {
+    "id": "76c0bef0-c269-4de7-be44-c340ef8834ba",
+    "name": "קלאוד בי",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "39091",
+    "expense_account": ""
+  },
+  {
+    "id": "f57da9ad-b185-4be3-b234-73fceda5d57d",
+    "name": "מכון למיקרוביולוגיה של מזון",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "49091",
+    "expense_account": ""
+  },
+  {
+    "id": "654d1dba-5412-42d2-9df6-4711be58c174",
+    "name": "איי אל דרינקס",
+    "should_upload": true,
+    "vat_rate": 18.0,
+    "aliases": [],
+    "notes": "",
+    "account_key": "59091",
+    "expense_account": ""
+  }
+]

@@ -137,20 +137,64 @@ _HEB_RE = re.compile(r'[\u05d0-\u05ea]')
 def _parse_hashavshevet_row(line: str):
     """
     Try to parse a חשבשבת account-list row.
-    Returns (name, account_key) or (None, '') if not a recognised format.
+    Returns (name, account_key) or (None, '') to skip this line.
     """
+    # Skip obvious header / garbage lines
+    if _is_garbage(line):
+        return None, ''
+
+    # Format 1: structured חשבשבת row — "[SORT] [KEY] [NAME] ^^^^^..."
     m = _HASHAV_ROW.match(line)
     if m:
         account_key = m.group(1)
         name        = m.group(2).strip()
-        if _HEB_RE.search(name):
+        if _HEB_RE.search(name) and not _is_garbage(name):
             return name, account_key
 
-    # Fallback: if line has Hebrew text, use it as the name
-    if _HEB_RE.search(line):
-        # Strip leading/trailing numbers and punctuation
-        name = re.sub(r'^[\d\s\(\)\.]+|[\d\s\(\)\.]+$', '', line).strip()
-        if len(name) >= 2 and _HEB_RE.search(name):
+    # Format 2: plain Hebrew line (no ^^^^^ marker)
+    if '^' not in line and _HEB_RE.search(line):
+        name = re.sub(r'^[\d\s\(\)\.\"]+|[\d\s\(\)\.\"]+$', '', line).strip()
+        if len(name) >= 3 and _HEB_RE.search(name) and not _is_garbage(name):
             return name, ''
 
     return None, ''
+
+
+# Words that appear in headers/footers but never in real supplier names
+_HEADER_WORDS = {
+    # Correct (logical) forms
+    'קוד', 'מיון', 'מפתח', 'חשבון', 'החשבון', 'חתך', 'ראשי', 'מאזן',
+    'אינדקס', 'דוח', 'חשבונות', 'תאריך', 'סידורי', 'ממוין',
+    'מספר', 'תנועות', 'מתוך',
+    # Reversed (visual-order) forms of the same words
+    'דוק', 'ןוימ', 'חתפמ', 'ןובשח', 'ןובשחה', 'ךתח', 'ישאר', 'ןזאמ',
+    'סקדניא', 'חוד', 'תונובשח', 'ךיראת', 'ירודיס', 'ןיוממ',
+    'רפסמ', 'תועונת', 'ךותמ',
+}
+# Single words that are alone sufficient to identify a garbage line
+_HEADER_SINGLES = {'עמוד', 'דומע'}
+
+
+def _is_garbage(text: str) -> bool:
+    """Return True if text is a header row, timestamp, or otherwise not a supplier name."""
+    from core.pdf_processor import _fix_line
+    t = text.strip()
+
+    # Timestamp / date — both normal and reversed form (e.g. 6202/4/71)
+    if re.search(r'\d{1,2}/\d{1,2}/\d{2,4}', t) or re.search(r'\d{4}/\d{1,2}', t):
+        return True
+    # Contains ^^^^^ but not in structured format (partial / broken)
+    if '^^^^' in t and not _HASHAV_ROW.match(t):
+        return True
+    # Very short after stripping punctuation
+    clean = re.sub(r'[\s\"\'\.\-]', '', t)
+    if len(clean) <= 3:
+        return True
+    # Check header keywords in both original and direction-fixed form
+    for candidate in (t, _fix_line(t)):
+        words = set(re.findall(r'[\u05d0-\u05ea]+', candidate))
+        if words & _HEADER_SINGLES:          # any single strong header word
+            return True
+        if len(words & _HEADER_WORDS) >= 2:  # two or more header keywords
+            return True
+    return False
