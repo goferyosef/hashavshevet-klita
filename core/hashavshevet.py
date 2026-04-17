@@ -10,9 +10,7 @@ from typing import Callable, Optional
 import httpx
 from playwright.async_api import async_playwright, Page, Browser, Playwright
 
-# ── API base URL (load-balanced) ──────────────────────────────────────────────
-API_BASE = "https://lb1.wizcloud.co.il"
-WEB_URL  = "https://home.wizcloud.co.il/"
+WEB_URL = "https://home.wizcloud.co.il/"
 
 # ── Playwright selectors for the web UI (file attachment only) ────────────────
 # Update these after inspecting the WizCloud interface with DevTools.
@@ -34,6 +32,7 @@ class HashavshevetClient:
         self,
         api_key: str,
         db_name: str,
+        server: str,
         web_username: str,
         web_password: str,
         vat_account: str,
@@ -41,6 +40,7 @@ class HashavshevetClient:
     ):
         self.api_key      = api_key
         self.db_name      = db_name
+        self.server       = server.rstrip("/")
         self.web_username = web_username
         self.web_password = web_password
         self.vat_account  = vat_account
@@ -56,7 +56,8 @@ class HashavshevetClient:
     # ── Lifecycle ─────────────────────────────────────────────────────────────
 
     async def start(self):
-        self._http = httpx.AsyncClient(base_url=API_BASE, timeout=30)
+        base = f"https://{self.server}" if not self.server.startswith("http") else self.server
+        self._http = httpx.AsyncClient(base_url=base, timeout=30)
 
     async def close(self):
         if self._http:
@@ -78,7 +79,8 @@ class HashavshevetClient:
         self._token = data.get("wizAuthToken") or data.get("token") or data.get("Token")
         if not self._token:
             raise RuntimeError(f"לא התקבל טוקן. תשובת שרת: {data}")
-        self._http.headers.update({"Authorization": f"Bearer {self._token}"})
+        # Docs show raw token in Authorization (not Bearer prefix)
+        self._http.headers.update({"Authorization": self._token})
         self.log("התחברות API הצליחה ✔")
         return True
 

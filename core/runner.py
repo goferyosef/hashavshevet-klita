@@ -32,6 +32,7 @@ class RunWorker(QThread):
         receipt_folder: str,
         api_key: str,
         db_name: str,
+        server: str,
         web_username: str,
         web_password: str,
         vat_account: str,
@@ -45,6 +46,7 @@ class RunWorker(QThread):
         self.receipt_folder          = receipt_folder
         self.api_key                 = api_key
         self.db_name                 = db_name
+        self.server                  = server
         self.web_username            = web_username
         self.web_password            = web_password
         self.vat_account             = vat_account
@@ -95,6 +97,7 @@ class RunWorker(QThread):
                 client = HashavshevetClient(
                     api_key=self.api_key,
                     db_name=self.db_name,
+                    server=self.server,
                     web_username=self.web_username,
                     web_password=self.web_password,
                     vat_account=self.vat_account,

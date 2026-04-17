@@ -108,6 +108,7 @@ class RunTab(QWidget):
             receipt_folder=cfg.receipt_folder,
             api_key=cfg.api_key,
             db_name=cfg.db_name,
+            server=cfg.server,
             web_username=cfg.username,
             web_password=cfg.password,
             vat_account=cfg.vat_account,

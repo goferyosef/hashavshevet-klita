@@ -40,8 +40,13 @@ class ConfigTab(QWidget):
         api_layout.addRow("API Private Key:", self.api_key_edit)
 
         self.db_name_edit = QLineEdit()
-        self.db_name_edit.setPlaceholderText("שם מסד הנתונים (DB Name)")
+        self.db_name_edit.setPlaceholderText("שם מסד הנתונים, לדוגמה: wizdb12n12")
         api_layout.addRow("DB Name:", self.db_name_edit)
+
+        self.server_edit = QLineEdit()
+        self.server_edit.setPlaceholderText("לדוגמה: lb1.wizcloud.co.il")
+        self.server_edit.setText("lb1.wizcloud.co.il")
+        api_layout.addRow("Server:", self.server_edit)
 
         hint = QLabel(
             'כיצד לקבל את המפתח: היכנס לחשבשבת → הגדרות → API → '
@@ -140,6 +145,7 @@ class ConfigTab(QWidget):
                 self.receipt_edit.setText(cfg.get("receipt_folder", ""))
                 self.username_edit.setText(cfg.get("username", ""))
                 self.db_name_edit.setText(cfg.get("db_name", ""))
+                self.server_edit.setText(cfg.get("server", "lb1.wizcloud.co.il"))
                 self.vat_account_edit.setText(cfg.get("vat_account", ""))
                 self.default_expense_edit.setText(cfg.get("default_expense_account", ""))
             except Exception:
@@ -163,6 +169,7 @@ class ConfigTab(QWidget):
             "receipt_folder":          self.receipt_edit.text().strip(),
             "username":                username,
             "db_name":                 self.db_name_edit.text().strip(),
+            "server":                  self.server_edit.text().strip(),
             "vat_account":             self.vat_account_edit.text().strip(),
             "default_expense_account": self.default_expense_edit.text().strip(),
         }
@@ -203,6 +210,10 @@ class ConfigTab(QWidget):
     @property
     def db_name(self) -> str:
         return self.db_name_edit.text().strip()
+
+    @property
+    def server(self) -> str:
+        return self.server_edit.text().strip() or "lb1.wizcloud.co.il"
 
     @property
     def vat_account(self) -> str:
