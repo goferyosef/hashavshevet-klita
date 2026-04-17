@@ -41,13 +41,17 @@ class SuppliersTab(QWidget):
         del_btn.setObjectName("btn_danger")
         import_btn = QPushButton("ייבא מ-PDF")
         import_btn.setObjectName("btn_secondary")
+        fix_btn    = QPushButton("תקן כיוון עברית")
+        fix_btn.setObjectName("btn_secondary")
+        fix_btn.setToolTip("תקן שמות ספקים שיובאו הפוכים מקובץ PDF ישן")
 
         add_btn.clicked.connect(self._add_supplier)
         edit_btn.clicked.connect(self._edit_supplier)
         del_btn.clicked.connect(self._delete_supplier)
         import_btn.clicked.connect(self._import_from_pdf)
+        fix_btn.clicked.connect(self._fix_hebrew_direction)
 
-        for btn in (add_btn, edit_btn, del_btn, import_btn):
+        for btn in (add_btn, edit_btn, del_btn, import_btn, fix_btn):
             toolbar.addWidget(btn)
         toolbar.addStretch()
         layout.addLayout(toolbar)
@@ -128,6 +132,14 @@ class SuppliersTab(QWidget):
         if reply == QMessageBox.StandardButton.Yes:
             self.manager.delete(supplier.id)
             self._refresh_table()
+
+    def _fix_hebrew_direction(self):
+        fixed = self.manager.fix_all_directions()
+        self._refresh_table()
+        if fixed:
+            QMessageBox.information(self, "תיקון כיוון", f"תוקנו {fixed} שמות ספקים ✔")
+        else:
+            QMessageBox.information(self, "תיקון כיוון", "לא נמצאו שמות הפוכים לתיקון.")
 
     def _import_from_pdf(self):
         path, _ = QFileDialog.getOpenFileName(
