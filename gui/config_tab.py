@@ -5,11 +5,14 @@ import keyring
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit,
-    QPushButton, QFileDialog, QGroupBox, QFormLayout, QMessageBox,
+    QPushButton, QFileDialog, QGroupBox, QMessageBox, QSizePolicy,
+    QScrollArea,
 )
 
 SERVICE_NAME = "קליטה_לחשבשבת"
 CONFIG_FILE  = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "config.json")
+
+LABEL_WIDTH = 220
 
 
 class ConfigTab(QWidget):
@@ -22,117 +25,112 @@ class ConfigTab(QWidget):
     # ── Build UI ──────────────────────────────────────────────────────────────
 
     def _build_ui(self):
+        # Wrap everything in a scroll area so nothing gets cut off
+        scroll = QScrollArea(self)
+        scroll.setWidgetResizable(True)
+        scroll.setFrameShape(QScrollArea.Shape.NoFrame)
+
+        container = QWidget()
+        scroll.setWidget(container)
+
         outer = QVBoxLayout(self)
-        outer.setContentsMargins(30, 20, 30, 20)
-        outer.setSpacing(20)
+        outer.setContentsMargins(0, 0, 0, 0)
+        outer.addWidget(scroll)
+
+        inner = QVBoxLayout(container)
+        inner.setContentsMargins(30, 20, 30, 20)
+        inner.setSpacing(20)
 
         title = QLabel("הגדרות מערכת")
         title.setObjectName("section_title")
-        outer.addWidget(title)
+        inner.addWidget(title)
 
         # ── API credentials ────────────────────────────────────────────────
         api_group = QGroupBox("פרטי API של חשבשבת")
-        api_layout = QFormLayout(api_group)
-        api_layout.setSpacing(10)
+        api_inner = QVBoxLayout(api_group)
+        api_inner.setSpacing(8)
 
         self.api_key_edit = QLineEdit()
         self.api_key_edit.setPlaceholderText("WizCloud API Private Key")
-        api_layout.addRow("API Private Key:", self.api_key_edit)
+        api_inner.addLayout(_field_row("API Private Key:", self.api_key_edit))
 
         self.db_name_edit = QLineEdit()
-        self.db_name_edit.setPlaceholderText("שם מסד הנתונים, לדוגמה: wizdb12n12")
-        api_layout.addRow("DB Name:", self.db_name_edit)
+        self.db_name_edit.setPlaceholderText("לדוגמה: wizdb12n12")
+        api_inner.addLayout(_field_row("DB Name:", self.db_name_edit))
 
         self.server_edit = QLineEdit()
         self.server_edit.setPlaceholderText("לדוגמה: lb1.wizcloud.co.il")
         self.server_edit.setText("lb1.wizcloud.co.il")
-        api_layout.addRow("Server:", self.server_edit)
+        api_inner.addLayout(_field_row("Server:", self.server_edit))
 
         hint = QLabel(
-            'כיצד לקבל את המפתח: היכנס לחשבשבת → הגדרות → API → '
-            '"מפתח פרטי". אם לא מופיע — פנה לתמיכת WizCloud.'
+            'כיצד לקבל: היכנס לחשבשבת ← הגדרות ← API ← "מפתח פרטי". '
+            'DB Name: רחף על שם החברה ברשימת החברות.'
         )
         hint.setWordWrap(True)
-        hint.setStyleSheet("color: #7F8C8D; font-size: 11px;")
-        api_layout.addRow("", hint)
+        hint.setStyleSheet("color: #7F8C8D; font-size: 11px; padding-right: 4px;")
+        api_inner.addWidget(hint)
+        inner.addWidget(api_group)
 
-        outer.addWidget(api_group)
-
-        # ── Web credentials (for Playwright file attachment) ───────────────
+        # ── Web credentials ────────────────────────────────────────────────
         web_group = QGroupBox("פרטי כניסה לאתר (לצירוף קבצים)")
-        web_layout = QFormLayout(web_group)
-        web_layout.setSpacing(10)
+        web_inner = QVBoxLayout(web_group)
+        web_inner.setSpacing(8)
 
         self.username_edit = QLineEdit()
         self.username_edit.setPlaceholderText("שם משתמש")
-        web_layout.addRow("שם משתמש:", self.username_edit)
+        web_inner.addLayout(_field_row("שם משתמש:", self.username_edit))
 
         self.password_edit = QLineEdit()
         self.password_edit.setEchoMode(QLineEdit.EchoMode.Password)
         self.password_edit.setPlaceholderText("סיסמה")
-        web_layout.addRow("סיסמה:", self.password_edit)
-
-        outer.addWidget(web_group)
+        web_inner.addLayout(_field_row("סיסמה:", self.password_edit))
+        inner.addWidget(web_group)
 
         # ── Account codes ──────────────────────────────────────────────────
         acc_group = QGroupBox('קודי חשבונות ברירת מחדל')
-        acc_layout = QFormLayout(acc_group)
-        acc_layout.setSpacing(10)
+        acc_inner = QVBoxLayout(acc_group)
+        acc_inner.setSpacing(8)
 
         self.vat_account_edit = QLineEdit()
         self.vat_account_edit.setPlaceholderText('לדוגמה: 1315')
-        acc_layout.addRow('חשבון מע"מ תשומות:', self.vat_account_edit)
+        acc_inner.addLayout(_field_row('חשבון מע"מ תשומות:', self.vat_account_edit))
 
         self.default_expense_edit = QLineEdit()
         self.default_expense_edit.setPlaceholderText('לדוגמה: 8500')
-        acc_layout.addRow('חשבון הוצאות ברירת מחדל:', self.default_expense_edit)
+        acc_inner.addLayout(_field_row('חשבון הוצאות ברירת מחדל:', self.default_expense_edit))
 
         acc_note = QLabel(
             'קודים אלה ישמשו כשלספק אין קוד משלו. '
             'ניתן לעקוף לכל ספק בנפרד בלשונית "ספקים".'
         )
         acc_note.setWordWrap(True)
-        acc_note.setStyleSheet("color: #7F8C8D; font-size: 11px;")
-        acc_layout.addRow("", acc_note)
-
-        outer.addWidget(acc_group)
+        acc_note.setStyleSheet("color: #7F8C8D; font-size: 11px; padding-right: 4px;")
+        acc_inner.addWidget(acc_note)
+        inner.addWidget(acc_group)
 
         # ── Folders ────────────────────────────────────────────────────────
         folders_group = QGroupBox("תיקיות קלט")
-        folders_layout = QFormLayout(folders_group)
-        folders_layout.setSpacing(10)
+        folders_inner = QVBoxLayout(folders_group)
+        folders_inner.setSpacing(8)
 
-        self.invoice_edit, inv_row = self._folder_row("בחר תיקייה…")
-        folders_layout.addRow("תיקיית חשבוניות:", inv_row)
+        self.invoice_edit = QLineEdit()
+        self.invoice_edit.setPlaceholderText("בחר תיקייה…")
+        folders_inner.addLayout(_folder_row("תיקיית חשבוניות:", self.invoice_edit))
 
-        self.receipt_edit, rec_row = self._folder_row("בחר תיקייה…")
-        folders_layout.addRow("תיקיית קבלות:", rec_row)
-
-        outer.addWidget(folders_group)
+        self.receipt_edit = QLineEdit()
+        self.receipt_edit.setPlaceholderText("בחר תיקייה…")
+        folders_inner.addLayout(_folder_row("תיקיית קבלות:", self.receipt_edit))
+        inner.addWidget(folders_group)
 
         # Save button
         save_btn = QPushButton("שמור הגדרות")
         save_btn.setObjectName("btn_success")
         save_btn.setFixedWidth(160)
         save_btn.clicked.connect(self._save)
-        outer.addWidget(save_btn, alignment=Qt.AlignmentFlag.AlignRight)
+        inner.addWidget(save_btn, alignment=Qt.AlignmentFlag.AlignLeft)
 
-        outer.addStretch()
-
-    @staticmethod
-    def _folder_row(placeholder: str):
-        container = QWidget()
-        layout = QHBoxLayout(container)
-        layout.setContentsMargins(0, 0, 0, 0)
-        edit = QLineEdit()
-        edit.setPlaceholderText(placeholder)
-        browse_btn = QPushButton("עיין…")
-        browse_btn.setObjectName("btn_secondary")
-        browse_btn.setFixedWidth(70)
-        browse_btn.clicked.connect(lambda: _browse_folder(edit))
-        layout.addWidget(edit)
-        layout.addWidget(browse_btn)
-        return edit, container
+        inner.addStretch()
 
     # ── Persistence ───────────────────────────────────────────────────────────
 
@@ -150,7 +148,6 @@ class ConfigTab(QWidget):
                 self.default_expense_edit.setText(cfg.get("default_expense_account", ""))
             except Exception:
                 pass
-        # Load secrets from keyring
         username = self.username_edit.text()
         try:
             api_key = keyring.get_password(SERVICE_NAME, "api_key")
@@ -224,7 +221,39 @@ class ConfigTab(QWidget):
         return self.default_expense_edit.text().strip()
 
 
-def _browse_folder(line_edit: QLineEdit):
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+def _field_row(label_text: str, field: QLineEdit):
+    """Label on the right, input stretches to fill remaining width."""
+    row = QHBoxLayout()
+    row.setSpacing(10)
+    lbl = QLabel(label_text)
+    lbl.setFixedWidth(LABEL_WIDTH)
+    lbl.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+    field.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+    row.addWidget(field)       # field on left (stretches)
+    row.addWidget(lbl)         # label on right (fixed)
+    return row
+
+
+def _folder_row(label_text: str, field: QLineEdit):
+    row = QHBoxLayout()
+    row.setSpacing(10)
+    lbl = QLabel(label_text)
+    lbl.setFixedWidth(LABEL_WIDTH)
+    lbl.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+    field.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+    browse_btn = QPushButton("עיין…")
+    browse_btn.setObjectName("btn_secondary")
+    browse_btn.setFixedWidth(70)
+    browse_btn.clicked.connect(lambda: _browse(field))
+    row.addWidget(field)
+    row.addWidget(browse_btn)
+    row.addWidget(lbl)
+    return row
+
+
+def _browse(line_edit: QLineEdit):
     folder = QFileDialog.getExistingDirectory(None, "בחר תיקייה")
     if folder:
         line_edit.setText(folder)
