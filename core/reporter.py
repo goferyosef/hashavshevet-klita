@@ -75,6 +75,41 @@ class Reporter:
             max_len = max((len(str(c.value or "")) for c in col), default=10)
             ws.column_dimensions[col[0].column_letter].width = min(max_len + 4, 45)
 
+        # Legend — same sheet, two rows below last data row
+        legend_start = ws.max_row + 2
+        title_cell = ws.cell(row=legend_start, column=1, value="מקרא צבעי שורות:")
+        title_cell.font = Font(bold=True, name="Arial", size=11)
+        title_cell.alignment = Alignment(horizontal="right", vertical="center")
+
+        legend_entries = [
+            (ACTION_COLORS["הועלה"], "הועלה",              "המסמך הועלה בהצלחה לחשבשבת"),
+            (ACTION_COLORS["דולג"],  "דולג",               "המסמך דולג (ספק מוגדר כ'לא להעלות' או לא זוהה)"),
+            (ACTION_COLORS["שגיאה"], "שגיאה",              "אירעה שגיאה בעת עיבוד או העלאת המסמך"),
+            (ACTION_COLORS["הועלה"], "הועלה (מצב בדיקה)", "הרצה במצב Demo בלבד — לא הועלה בפועל"),
+        ]
+
+        entry_border = Border(
+            left=Side(style="thin", color="AAAAAA"),
+            right=Side(style="thin", color="AAAAAA"),
+            top=Side(style="thin", color="AAAAAA"),
+            bottom=Side(style="thin", color="AAAAAA"),
+        )
+        for offset, (color, label, description) in enumerate(legend_entries, 1):
+            r = legend_start + offset
+            swatch = ws.cell(row=r, column=1)
+            swatch.fill = PatternFill("solid", fgColor=color)
+            swatch.border = entry_border
+
+            label_cell = ws.cell(row=r, column=2, value=label)
+            label_cell.font = Font(name="Arial", size=10, bold=True)
+            label_cell.fill = PatternFill("solid", fgColor=color)
+            label_cell.alignment = Alignment(horizontal="right", vertical="center")
+            label_cell.border = entry_border
+
+            desc_cell = ws.cell(row=r, column=3, value=description)
+            desc_cell.font = Font(name="Arial", size=10)
+            desc_cell.alignment = Alignment(horizontal="right", vertical="center")
+
         path = os.path.join(self.output_dir, f"דוח_מסמכים_{run_timestamp}.xlsx")
         wb.save(path)
         return path
